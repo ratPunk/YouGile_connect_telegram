@@ -4,19 +4,22 @@
 который отправляет HTTP PUT-запрос к API сервиса YouGile для редактирования существующего вебхука.
 
  */
+
+require '../APITokens.php';
+
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-    CURLOPT_URL => "https://ru.yougile.com/api-v2/webhooks/ID_вебхука",
+    CURLOPT_URL => "https://ru.yougile.com/api-v2/webhooks/" . $webhook_id,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "PUT",
-    CURLOPT_POSTFIELDS => "{\n  \"deleted\": true,\n  \"url\": \"ваш_тунель\",\n  \"event\": \"task-created\",\n  \"disabled\": true\n}",
+    CURLOPT_POSTFIELDS => "{\n  \"deleted\": false,\n  \"url\": \"" . $tunnel . "webhook_handler.php\",\n  \"event\": \"task-created\",\n  \"disabled\": false\n}",
     CURLOPT_HTTPHEADER => [
-        "Authorization: Bearer API_KEY_YouGile",
+        "Authorization: Bearer " . $AUTHORIZATION_ID,
         "Content-Type: application/json"
     ],
 ]);

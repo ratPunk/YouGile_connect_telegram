@@ -1,11 +1,12 @@
 <?php
 //https://ru.yougile.com/api-v2/tasks?limit=22
 
+require_once '../APITokens.php';
 
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-    CURLOPT_URL => "https://ru.yougile.com/api-v2/tasks?limit=22",
+    CURLOPT_URL => "https://ru.yougile.com/api-v2/tasks",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
@@ -13,7 +14,7 @@ curl_setopt_array($curl, [
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => [
-        "Authorization: Bearer API_KEY_YouGile",
+        "Authorization: Bearer " . $AUTHORIZATION_ID,
         "Content-Type: application/json"
     ],
 ]);

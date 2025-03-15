@@ -1,11 +1,11 @@
 <?php
 /*
-Этот файл get_webhooks.php представляет собой PHP-скрипт,
-который отправляет HTTP GET-запрос к API сервиса YouGile для получения списка зарегистрированных вебхуков.
+который настраивает вебхук (webhook) для внешнего сервиса (в данном случае, сервиса YouGile ).
+Вебхук — это механизм, который позволяет сервису автоматически отправлять HTTP-запросы (обычно POST)
+на указанный URL при наступлении определенного события (например, создание задачи).
  */
 
-require '../APITokens.php';
-
+//055e54dd-029a-49ba-9ce8-e2706061016d
 $curl = curl_init();
 
 curl_setopt_array($curl, [
@@ -15,7 +15,8 @@ curl_setopt_array($curl, [
     CURLOPT_MAXREDIRS => 10,
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n  \"url\": \"" . $tunnel . "webhook_handler.php\",\n  \"event\": \"task-renamed\"\n}",
     CURLOPT_HTTPHEADER => [
         "Authorization: Bearer " . $AUTHORIZATION_ID,
         "Content-Type: application/json"

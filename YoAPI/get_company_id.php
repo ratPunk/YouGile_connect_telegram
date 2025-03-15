@@ -5,7 +5,9 @@
 API-ключ — это токен, который используется для аутентификации при взаимодействии с API сервиса.
  */
 
+require_once '../APITokens.php';
 
+//id company b540e39b-950b-4a83-9ff0-47208f305549
 $curl = curl_init();
 
 curl_setopt_array($curl, [
@@ -16,7 +18,7 @@ curl_setopt_array($curl, [
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n  \"login\": \"palseholder@gmail.com\",\n  \"password\": \"123\",\n  \"name\": \"YoureName\"\n}",
+    CURLOPT_POSTFIELDS => "{\n  \"login\": \"" . $email . "\",\n  \"password\": \"" . $password . "\",\n  \"name\": \"" . $name . "\"\n}",
     CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
 ]);
 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
